@@ -15,6 +15,10 @@ const Live = () => {
     const broadcast = useBroadcastEvent();
 
     useInterval(() => {
+        setReaction((reactions) => reactions.filter((r) => r.timestamp > Date.now() - 4000));
+    }, 1000);
+
+    useInterval(() => {
         if (cursorState.mode === CursorMode.Reaction && cursorState.isPressed && cursor) {
             setReaction((reactions) => reactions.concat([
                 {
