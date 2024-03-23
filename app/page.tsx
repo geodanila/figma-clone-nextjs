@@ -5,7 +5,7 @@ import Live from "@/components/Live";
 import Navbar from "@/components/Navbar";
 import RightSidebar from "@/components/RightSidebar";
 import { defaultNavElement } from "@/constants";
-import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvaseMouseMove as handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling } from "@/lib/canvas";
+import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvaseMouseMove as handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling, handlePathCreated } from "@/lib/canvas";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
@@ -150,6 +150,13 @@ export default function Page() {
       handleCanvasObjectScaling({
         options,
         setElementAttributes
+      });
+    });
+
+    canvas.on("path:created", (options) => {
+      handlePathCreated({
+        options,
+        syncShapeInStorage
       });
     });
 
